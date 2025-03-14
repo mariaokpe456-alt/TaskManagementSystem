@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Task Management Notifications</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignalR Notification Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.18/signalr.min.js"></script>
+</head>
+<body>
+    <h2>Notification Test</h2>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("https://localhost:5001/notificationHub") // Change this URL if needed
+            .build();
+
+        connection.start()
+            .then(() => console.log("Connected to NotificationHub"))
+            .catch(err => console.error("Connection error:", err));
+
+        connection.on("ReceiveNotification", message => {
+            console.log("Notification:", message);
+            alert(message); // Show alert for notification
+        });
+    </script>
+</body>
+</html>
